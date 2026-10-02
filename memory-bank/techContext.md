@@ -8,7 +8,7 @@
 
 ## Comunicación frontend-backend
 
-- El frontend hace peticiones relativas a `/api/books` desde [frontend/src/services/books.ts](../frontend/src/services/books.ts): `GET` para listar, `GET /api/books/{id}` para consultar por ID y `POST` para crear.
+- El frontend hace peticiones relativas a `/api/books` desde [frontend/src/services/books.ts](../frontend/src/services/books.ts): `GET` para listar (acepta el parámetro opcional `title`), `GET /api/books/{id}` para consultar por ID y `POST` para crear.
 - [frontend/vite.config.ts](../frontend/vite.config.ts) reenvía `/api` a `http://host.docker.internal:8000`.
 - [backend/app/main.py](../backend/app/main.py) monta el router de libros bajo `/api`, permite CORS desde `http://localhost:5173` y define `GET /api/health`.
 - [backend/app/routes/books.py](../backend/app/routes/books.py) define el contrato HTTP: la creación responde `201` y un ID inexistente responde `404`.
@@ -34,7 +34,8 @@ Desde `frontend/`, [frontend/package.json](../frontend/package.json) define `npm
 
 ## Comprobaciones observadas
 
-- Los comandos de Compose se documentan en los archivos citados; no se verificó aquí su ejecución.
-- En esta revisión, `npm run build` se detuvo por falta de declaración del import CSS de `frontend/src/main.tsx`.
-- En esta revisión, `npm run lint` no pudo arrancar porque `eslint` no estaba disponible después de instalar las dependencias fijadas por el lockfile.
-- No se verificó un comando de pruebas para el backend.
+- Los comandos de Compose se documentan en los archivos citados.
+- En esta revisión, `docker compose up --build backend` respondió `{"status":"ok"}` en `/api/health`, y el backend sirvió `GET /api/books` con y sin `title`, filtrando por título en ejecución.
+- En esta revisión, `npm run build` y `npm run lint` pasaron ejecutados dentro del contenedor del frontend (`docker compose run --rm --no-deps frontend ...`). En el host, `frontend/node_modules` está vacío y es propiedad de root, por lo que npm no puede instalar allí.
+- En esta revisión, el frontend sirvió en `5173` y el proxy de Vite reenvió `/api/books` con y sin `title` al backend.
+- No se verificó un comando de pruebas para el backend; el proyecto no declara uno.

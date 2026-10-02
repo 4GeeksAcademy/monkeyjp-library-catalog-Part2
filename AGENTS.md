@@ -64,6 +64,21 @@ npm run preview
 ## Verificación
 
 - Ejecuta `docker compose up --build`; comprueba la respuesta de `/api/health` y abre `http://localhost:5173`.
-- En la interfaz, comprueba la carga del catálogo, la búsqueda por título o autor y el alta de un libro.
+- En la interfaz, comprueba la carga del catálogo, la búsqueda por parte del título y el alta de un libro.
 - Para cambios del frontend, ejecuta `npm run build` y `npm run lint` desde `frontend/`.
 - Al modificar rutas, modelos o proxy, comprueba ambos lados del contrato y la configuración de Compose.
+
+## Mantenimiento del contexto
+
+- Cuando implementes una funcionalidad o un cambio relevante, revisa si ese cambio afecta al contexto documentado del proyecto.
+- Actualiza únicamente los archivos que hayan quedado desactualizados por el cambio.
+- Revisa especialmente:
+  - `memory-bank/` si cambia el estado actual del proyecto, la arquitectura, decisiones técnicas, funcionalidades disponibles o trabajo pendiente.
+  - `.agents/rules/` si el cambio introduce o modifica una convención, patrón, restricción o forma de trabajar que los agentes deban seguir en futuras tareas.
+  - `AGENTS.md` si cambia una regla global del proyecto, el stack, la estructura, los comandos, los contratos principales o el flujo general de trabajo.
+  - `README.md` u otra documentación funcional si cambia algo que un desarrollador o usuario necesite conocer.
+
+- No actualices estos archivos por rutina si el cambio no modifica la información que contienen.
+- No dupliques información innecesariamente entre `AGENTS.md`, `.agents/rules/` y `memory-bank/`; actualiza el archivo que sea responsable de ese tipo de conocimiento.
+- Antes de finalizar una tarea relevante, comprueba si la documentación de contexto sigue representando correctamente el estado real del código.
+- No documentes como implementado o verificado algo que no hayas comprobado en el código o en ejecución.

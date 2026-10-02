@@ -2,8 +2,12 @@ from app.data.books import BOOKS
 from app.models.book import BookCreate
 
 
-def list_books():
-    return BOOKS
+def list_books(title: str | None = None):
+    if title is None or not title.strip():
+        return BOOKS
+
+    term = title.strip().lower()
+    return [book for book in BOOKS if term in book["title"].lower()]
 
 
 def get_book(book_id: int):

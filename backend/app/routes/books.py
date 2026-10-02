@@ -7,8 +7,8 @@ router = APIRouter(prefix="/books", tags=["books"])
 
 
 @router.get("", response_model=list[Book])
-def get_books():
-    return list_books()
+def get_books(title: str | None = None):
+    return list_books(title)
 
 
 @router.get("/{book_id}", response_model=Book)

@@ -1,6 +1,6 @@
 # Resumen del producto
 
-El proyecto implementa un catálogo web de biblioteca. La interfaz permite consultar la colección, buscar libros por título o autor, obtener un libro por ID, ver su disponibilidad y añadir un libro con título, autor y año.
+El proyecto implementa un catálogo web de biblioteca. La interfaz permite consultar la colección, buscar libros por parte de su título mediante `GET /api/books?title=<string>`, obtener un libro por ID, ver su disponibilidad y añadir un libro con título, autor y año.
 
 ## Hechos verificados en el código
 
