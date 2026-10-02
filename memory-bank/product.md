@@ -1,12 +1,12 @@
 # Resumen del producto
 
-El proyecto implementa un catálogo web de biblioteca. La interfaz permite consultar la colección, buscar libros por parte de su título mediante `GET /api/books?title=<string>`, obtener un libro por ID, ver su disponibilidad y añadir un libro con título, autor y año.
+El proyecto implementa un catálogo web de biblioteca. La interfaz permite consultar la colección, buscar libros por parte de su título mediante `GET /api/books?title=<string>`, obtener un libro por ID, ver su disponibilidad, añadir un libro con título, autor y año, y ver un resumen de hasta 3 géneros principales con cantidad y porcentaje del total.
 
 ## Hechos verificados en el código
 
 - La interfaz muestra totales de libros disponibles y no disponibles.
-- Un libro contiene `id`, `title`, `author`, `year` y `available`.
-- La API define operaciones para listar libros, consultar uno por ID y crear libros. La consulta de un ID inexistente responde `404`; la creación responde `201`.
+- Un libro contiene `id`, `title`, `author`, `year`, `available` y `genre`.
+- La API define operaciones para listar libros, consultar uno por ID, crear libros y obtener el resumen de géneros (`GET /api/books/genres/summary`, acepta `title`). La consulta de un ID inexistente responde `404`; la creación responde `201`.
 - El formulario crea libros con `available: true`.
 
 ## Límites de lo conocido

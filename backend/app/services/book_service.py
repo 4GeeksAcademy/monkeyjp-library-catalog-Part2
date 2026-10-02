@@ -1,5 +1,5 @@
 from app.data.books import BOOKS
-from app.models.book import BookCreate
+from app.models.book import BookCreate, GenreSummary
 
 
 def list_books(title: str | None = None):
@@ -19,3 +19,27 @@ def add_book(data: BookCreate):
     book = {"id": next_id, **data.model_dump()}
     BOOKS.append(book)
     return book
+
+
+def genres_summary(title: str | None = None):
+    books = list_books(title)
+    total = len(books)
+
+    if total == 0:
+        return []
+
+    counts: dict[str, int] = {}
+    for book in books:
+        genre = book.get("genre", "Sin género")
+        counts[genre] = counts.get(genre, 0) + 1
+
+    ranked = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:3]
+
+    return [
+        GenreSummary(
+            genre=genre,
+            count=count,
+            percentage=round(count * 100 / total, 2),
+        )
+        for genre, count in ranked
+    ]

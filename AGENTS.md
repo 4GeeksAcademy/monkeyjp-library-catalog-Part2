@@ -41,9 +41,10 @@ npm run preview
 
 ## Reglas de dominio
 
-- Un libro contiene `id`, `title`, `author`, `year` y `available`.
-- `title` y `author` requieren al menos un carácter; `year` es entero; `available` es booleano y su valor predeterminado es `true`.
+- Un libro contiene `id`, `title`, `author`, `year`, `available` y `genre`.
+- `title` y `author` requieren al menos un carácter; `year` es entero; `available` es booleano y su valor predeterminado es `true`; `genre` tiene un valor predeterminado.
 - La API lista libros (`GET /api/books`), consulta por ID (`GET /api/books/{book_id}`) y crea libros (`POST /api/books`). La creación responde `201`; un ID inexistente responde `404`.
+- `GET /api/books/genres/summary` devuelve hasta 3 géneros con más libros (género, cantidad y porcentaje) del conjunto filtrado por el parámetro opcional `title`.
 - El servicio calcula el siguiente ID como el máximo actual más uno. No dependas de este mecanismo si introduces concurrencia o persistencia distinta.
 
 ## Forma de trabajar

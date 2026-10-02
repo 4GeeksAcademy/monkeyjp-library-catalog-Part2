@@ -5,6 +5,7 @@ BOOKS = [
         "author": "J. K. Rowling",
         "year": 1997,
         "available": True,
+        "genre": "Fantasy",
     },
     {
         "id": 2,
@@ -12,6 +13,7 @@ BOOKS = [
         "author": "J. R. R. Tolkien",
         "year": 1954,
         "available": False,
+        "genre": "Fantasy",
     },
     {
         "id": 3,
@@ -19,6 +21,7 @@ BOOKS = [
         "author": "J. R. R. Tolkien",
         "year": 1937,
         "available": True,
+        "genre": "Fantasy",
     },
     {
         "id": 4,
@@ -26,6 +29,7 @@ BOOKS = [
         "author": "George Orwell",
         "year": 1949,
         "available": True,
+        "genre": "Dystopia",
     },
     {
         "id": 5,
@@ -33,6 +37,7 @@ BOOKS = [
         "author": "Robert C. Martin",
         "year": 2008,
         "available": False,
+        "genre": "Programming",
     },
     {
         "id": 6,
@@ -40,6 +45,7 @@ BOOKS = [
         "author": "Git McCommit",
         "year": 2026,
         "available": True,
+        "genre": "Programming",
     },
     {
         "id": 7,
@@ -47,5 +53,6 @@ BOOKS = [
         "author": "Docker McContainer",
         "year": 2026,
         "available": False,
+        "genre": "Programming",
     },
 ]

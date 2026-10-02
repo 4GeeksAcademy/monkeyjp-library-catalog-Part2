@@ -8,7 +8,7 @@
 
 ## Comunicación frontend-backend
 
-- El frontend hace peticiones relativas a `/api/books` desde [frontend/src/services/books.ts](../frontend/src/services/books.ts): `GET` para listar (acepta el parámetro opcional `title`), `GET /api/books/{id}` para consultar por ID y `POST` para crear.
+- El frontend hace peticiones relativas a `/api/books` desde [frontend/src/services/books.ts](../frontend/src/services/books.ts): `GET` para listar (acepta el parámetro opcional `title`), `GET /api/books/{id}` para consultar por ID, `POST` para crear y `GET /api/books/genres/summary` para el resumen de géneros (acepta `title`).
 - [frontend/vite.config.ts](../frontend/vite.config.ts) reenvía `/api` a `http://host.docker.internal:8000`.
 - [backend/app/main.py](../backend/app/main.py) monta el router de libros bajo `/api`, permite CORS desde `http://localhost:5173` y define `GET /api/health`.
 - [backend/app/routes/books.py](../backend/app/routes/books.py) define el contrato HTTP: la creación responde `201` y un ID inexistente responde `404`.

@@ -10,6 +10,7 @@ Hechos verificados en el código y, donde se indica, en ejecución:
 - El formulario envía libros con título, autor, año y disponibilidad inicial `true`.
 - El frontend permite consultar un libro por ID mediante `getBookById` y la interfaz `BookLookup` muestra estados de carga, no encontrado y error.
 - El backend define `GET /api/books`, `GET /api/books/{book_id}` y `POST /api/books`.
+- El backend define `GET /api/books/genres/summary` (acepta `title` opcional): devuelve hasta 3 géneros con más libros del conjunto filtrado, con cantidad y porcentaje; la interfaz lo muestra y añade una nota cuando hay menos de 3.
 - La consulta de un ID inexistente responde `404` y la creación responde `201`.
 - Las rutas backend delegan la lógica en `book_service` y usan modelos Pydantic para las respuestas.
 - Docker Compose define los servicios frontend y backend, publicados en los puertos `5173` y `8000`.

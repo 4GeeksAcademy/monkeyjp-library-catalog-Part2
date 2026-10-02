@@ -3,12 +3,13 @@ import { BookOpen, Library, Search } from "lucide-react";
 import BookCard from "./components/BookCard";
 import BookForm from "./components/BookForm";
 import BookLookup from "./components/BookLookup";
-import { getBooks } from "./services/books";
-import type { Book } from "./types/book";
+import { getBooks, getGenresSummary } from "./services/books";
+import type { Book, GenreSummary } from "./types/book";
 
 export default function App() {
   const [books, setBooks] = useState<Book[]>([]);
   const [results, setResults] = useState<Book[]>([]);
+  const [summary, setSummary] = useState<GenreSummary[]>([]);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
 
@@ -26,6 +27,18 @@ export default function App() {
         if (!cancelled) {
           setResults(data);
           setError("");
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError("Could not load catalog");
+        }
+      });
+
+    getGenresSummary(search)
+      .then((data) => {
+        if (!cancelled) {
+          setSummary(data);
         }
       })
       .catch(() => {
@@ -96,6 +109,55 @@ export default function App() {
         />
 
         <BookLookup />
+
+        <section>
+          <div className="mb-5">
+            <h2 className="text-xl font-bold text-slate-900">
+              Top genres
+            </h2>
+            <p className="text-sm text-slate-500">
+              Genres with more books in the current selection.
+            </p>
+          </div>
+
+          {summary.length > 0 ? (
+            <>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {summary.map((item) => (
+                  <div
+                    key={item.genre}
+                    className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold text-slate-900">
+                        {item.genre}
+                      </p>
+                      <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700">
+                        {item.percentage}%
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm text-slate-500">
+                      {item.count}{" "}
+                      {item.count === 1 ? "book" : "books"}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {summary.length < 3 && (
+                <div className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-700">
+                  There are less than 3 genres in the current selection.
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-slate-300 bg-white py-10 text-center">
+              <p className="font-medium text-slate-600">
+                No genres to show
+              </p>
+            </div>
+          )}
+        </section>
 
         <section>
           <div className="mb-5 flex flex-col justify-between gap-4 md:flex-row md:items-center">

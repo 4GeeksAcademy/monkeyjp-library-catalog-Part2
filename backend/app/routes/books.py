@@ -1,7 +1,12 @@
 from fastapi import APIRouter, HTTPException, status
 
-from app.models.book import Book, BookCreate
-from app.services.book_service import add_book, get_book, list_books
+from app.models.book import Book, BookCreate, GenreSummary
+from app.services.book_service import (
+    add_book,
+    genres_summary,
+    get_book,
+    list_books,
+)
 
 router = APIRouter(prefix="/books", tags=["books"])
 
@@ -9,6 +14,15 @@ router = APIRouter(prefix="/books", tags=["books"])
 @router.get("", response_model=list[Book])
 def get_books(title: str | None = None):
     return list_books(title)
+
+
+@router.get(
+    "/genres/summary",
+    response_model=list[GenreSummary],
+    summary="Top genres summary",
+)
+def get_genres_summary(title: str | None = None):
+    return genres_summary(title)
 
 
 @router.get("/{book_id}", response_model=Book)
